@@ -29,10 +29,16 @@ public class Shop {
     /**
      * Relationships
      */
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "shop",
+            cascade = CascadeType.ALL
+    )
     public List<Customer> customers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "shop",
+            cascade = CascadeType.ALL
+    )
     public List<Product> products = new ArrayList<>();
 
     public Shop(String name, String address) {
@@ -66,6 +72,14 @@ public class Shop {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void addCustomer(Customer customer) {
+        this.customers.add(customer);
+    }
+
+    public void addProduct(Product product) {
+        this.products.add(product);
     }
 
     @Override

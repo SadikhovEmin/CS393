@@ -36,8 +36,8 @@ public class Order {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "OrderProduct",
-            joinColumns = @JoinColumn(name = "Prod_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "Order_ID", referencedColumnName = "ID")
+            joinColumns = @JoinColumn(name = "Order_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "Prod_ID", referencedColumnName = "ID")
     )
     public List<Product> productList = new ArrayList<>();
 
@@ -72,5 +72,23 @@ public class Order {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void addProduct(Product product) {
+        this.productList.add(product);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", date=" + date +
+                ", amount=" + amount +
+                ", customer=" + customer +
+                '}';
     }
 }

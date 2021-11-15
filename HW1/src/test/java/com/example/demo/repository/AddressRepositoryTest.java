@@ -19,7 +19,7 @@ class AddressRepositoryTest {
 
     @Test
     public void saveAddress() {
-        Address address = new Address("Cekmekoy", "Istanbul");
+        Address address = new Address("Baku", "Azerbaijan");
         repository.save(address);
 
         assertTrue(address.getId() > 0);

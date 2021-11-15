@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -16,14 +18,11 @@ class CustomerRepositoryTest {
     @Autowired
     private CustomerRepository repository;
 
-    @Autowired
-    private AddressRepository addressRepository;
-
     @Test
     public void saveCustomer() {
         Shop shop = new Shop("Nero", "Center");
-        Address address = new Address("Baku", "Azerbaijan");
-//        Address address = addressRepository.getById(2);
+        Address address = new Address("Iceriseher", "Baku");
+//        Address address = addressRepository.getById(1);
 
         Customer customer = new Customer("firstName 1", "lastName 1");
         customer.setShop(shop);
@@ -31,5 +30,15 @@ class CustomerRepositoryTest {
         repository.save(customer);
 
         assertTrue(customer.getId() > 0);
+    }
+
+    @Test
+    public void getCustomer() {
+        List<Customer> customerList = repository.findAll();
+
+        for (Customer customer : customerList)
+            System.out.println("customer = " + customer);
+
+        assertFalse(customerList.isEmpty());
     }
 }

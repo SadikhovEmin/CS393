@@ -19,7 +19,7 @@ class ShopRepositoryTest {
 
     @Test
     public void saveShop() {
-        Shop shop = new Shop("shop3", "shop2 address");
+        Shop shop = new Shop("shop5", "shop5 address");
         repository.save(shop);
 
         assertTrue(shop.getId() > 0);

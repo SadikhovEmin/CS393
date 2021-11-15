@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import org.hibernate.annotations.JoinColumnOrFormula;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,10 +39,13 @@ public class Customer {
     )
     public Shop shop;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    public List<Order> orderList;
+    @OneToMany(
+            mappedBy = "customer",
+            cascade = CascadeType.ALL
+    )
+    public List<Order> orderList = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "Address_ID",
             nullable = false, referencedColumnName = "ID"
@@ -88,5 +92,20 @@ public class Customer {
 
     public void setShop(Shop shop) {
         this.shop = shop;
+    }
+
+    public void addOrder(Order order) {
+        orderList.add(order);
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", shop=" + shop +
+                ", address=" + address +
+                '}';
     }
 }
