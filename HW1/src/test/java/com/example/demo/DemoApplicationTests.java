@@ -51,7 +51,7 @@ class DemoApplicationTests {
 
 		Shop shop = new Shop();
 		shop.setName("Bravo");
-		shop.setAddress("Genclik/Baku");
+	shop.setAddress("Genclik/Baku");
 
 		product.setShop(shop);
 		product.getOrderList().add(order);
@@ -69,25 +69,11 @@ class DemoApplicationTests {
 
 		shopRepository.save(shop);
 
-		assertEquals(
-				1,
-				shopRepository.findAll().size()
-		);
-		assertEquals(
-				1,
-				productRepository.findAll().size()
-		);
-		assertEquals(
-				1,
-				orderRepository.findAll().size()
-		);
-		assertEquals(
-				1,
-				customerRepository.findAll().size()
-		);
+		assertTrue(shopRepository.findAll().size() > 0);
+		assertTrue(productRepository.findAll().size() > 0);
+		assertTrue(orderRepository.findAll().size() > 0);
+		assertTrue(customerRepository.findAll().size() > 0);
 
-		System.out.println("shopRepository.findAll().size() = 1" +
-				shopRepository.findAll().size() + 1);
 	}
 
 	@Test
@@ -113,22 +99,10 @@ class DemoApplicationTests {
 		for (Shop shop : shopList)
 			System.out.println("shop = " + shop);
 
-		assertEquals(
-				1,
-				shopRepository.findAll().size()
-		);
-		assertEquals(
-				1,
-				productRepository.findAll().size()
-		);
-		assertEquals(
-				1,
-				orderRepository.findAll().size()
-		);
-		assertEquals(
-				1,
-				customerRepository.findAll().size()
-		);
+		assertTrue(shopRepository.findAll().size() > 0);
+		assertTrue(productRepository.findAll().size() > 0);
+		assertTrue(orderRepository.findAll().size() > 0);
+		assertTrue(customerRepository.findAll().size() > 0);
 	}
 
 }
