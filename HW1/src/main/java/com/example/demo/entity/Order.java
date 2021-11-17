@@ -31,7 +31,11 @@ public class Order {
      * Relationsships
      */
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Customer_ID", nullable = false, referencedColumnName = "ID")
+    @JoinColumn(
+            name = "Customer_ID",
+            nullable = false,
+            referencedColumnName = "ID"
+    )
     public Customer customer;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -80,6 +84,18 @@ public class Order {
 
     public void addProduct(Product product) {
         this.productList.add(product);
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override

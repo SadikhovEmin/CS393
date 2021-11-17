@@ -20,21 +20,22 @@ class OrderRepositoryTest {
 
     @Test
     public void saveOrder() {
-        Shop shop = new Shop("Yurt 2", "HZY");
-        Address address = new Address("Address_Temp","City_Temp");
-        Customer customer = new Customer("New name", "New last name");
+        Shop shop = new Shop("Yemekhane", "university");
+        Address address = new Address("ozyegin","cekmeyok");
+        Customer customer = new Customer("emin", "sadikhov");
         customer.setShop(shop);
         customer.setAddress(address);
 
-        Product product = new Product("product 2", 100.0);
+        Product product = new Product("corba", 20.0);
         product.setShop(shop);
 
         shop.addCustomer(customer);
         shop.addProduct(product);
 
-        Order order = new Order(new Date(), 5.99);
+        Order order = new Order(new Date(), 30.0);
         order.setCustomer(customer);
         order.addProduct(product);
+        product.addOrder(order);
 
         repository.save(order);
 

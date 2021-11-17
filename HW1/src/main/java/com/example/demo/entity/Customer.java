@@ -22,10 +22,10 @@ public class Customer {
     )
     private Integer id;
 
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "firstName", nullable = false, length = 20)
     public String firstName;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "lastName", nullable = false, length = 20)
     public String lastName;
 
 
@@ -96,6 +96,22 @@ public class Customer {
 
     public void addOrder(Order order) {
         orderList.add(order);
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     @Override

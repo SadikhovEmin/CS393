@@ -20,7 +20,7 @@ public class Product {
     )
     private Integer id;
 
-    @Column(name = "Name")
+    @Column(name = "Name", length = 20)
     public String name;
 
     @Column(name = "Price")
@@ -73,6 +73,22 @@ public class Product {
 
     public void setShop(Shop shop) {
         this.shop = shop;
+    }
+
+    public void addOrder(Order order) {
+        this.orderList.add(order);
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 
     @Override

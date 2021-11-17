@@ -18,10 +18,10 @@ public class Address {
     )
     private Integer id;
 
-    @Column(name = "text")
+    @Column(name = "text", length = 70)
     public String text;
 
-    @Column(name = "city")
+    @Column(name = "city", length = 20)
     public String city;
 
 

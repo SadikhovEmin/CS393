@@ -20,10 +20,10 @@ public class Shop {
     )
     private Integer id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "Name", nullable = false, length = 20)
     public String name;
 
-    @Column(name = "Address", nullable = false)
+    @Column(name = "Address", nullable = false, length = 70)
     public String address;
 
     /**
@@ -68,6 +68,22 @@ public class Shop {
 
     public String getAddress() {
         return address;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public void setAddress(String address) {
