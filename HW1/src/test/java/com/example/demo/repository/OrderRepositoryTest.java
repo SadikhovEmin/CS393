@@ -34,8 +34,11 @@ class OrderRepositoryTest {
 
         Order order = new Order(new Date(), 30.0);
         order.setCustomer(customer);
-        order.addProduct(product);
-        product.addOrder(order);
+//        order.addProduct(product);
+        order.getProductList().add(product);
+//        product.addOrder(order);
+        product.getOrderList().add(order);
+        customer.getOrderList().add(order);
 
         repository.save(order);
 
