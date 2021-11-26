@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.JoinColumnOrFormula;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class Customer {
     /**
     Relationships
      */
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "Shop_ID",
@@ -39,12 +41,14 @@ public class Customer {
     )
     public Shop shop;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "customer",
             cascade = CascadeType.ALL
     )
     public List<Order> orderList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "Address_ID",

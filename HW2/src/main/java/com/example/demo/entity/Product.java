@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +31,12 @@ public class Product {
     /**
      * Relationships
      */
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Shop_ID", nullable = false, referencedColumnName = "ID")
     public Shop shop;
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "productList", cascade = CascadeType.ALL)
     public List<Order> orderList = new ArrayList<>();
 

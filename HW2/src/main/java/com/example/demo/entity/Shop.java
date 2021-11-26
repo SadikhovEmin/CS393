@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +31,14 @@ public class Shop {
     /**
      * Relationships
      */
+    @JsonIgnore
     @OneToMany(
-            mappedBy = "shop",
-            cascade = CascadeType.ALL
+            mappedBy = "shop"
     )
     public List<Customer> customers = new ArrayList<>();
 
     @OneToMany(
-            mappedBy = "shop",
-            cascade = CascadeType.ALL
+            mappedBy = "shop"
     )
     public List<Product> products = new ArrayList<>();
 
