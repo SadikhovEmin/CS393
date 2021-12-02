@@ -13,15 +13,6 @@ import java.util.List;
 public interface ShopRepository extends JpaRepository<Shop, Integer> {
     List<Shop> findByAddressContains(String address);
 
-//    @Query("select s from Shop s where s.id = ?1")
-//    Shop pullById(Integer id);
-
-    @Modifying
-    @Transactional
-    @Query("delete from Shop s where s.id = ?1")
-    void deletebyId(int id);
-
-
-    @Query("select s from Shop s inner join s.products p  where p.price > 10 and s.id = ?1")
+    @Query("select s from Shop s inner join s.products p  where p.price > 200 and s.id = ?1")
     List<Shop> getSpecificShop(int id);
 }
