@@ -32,7 +32,7 @@ public class Product {
      * Relationships
      */
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "Shop_ID", nullable = false, referencedColumnName = "ID")
     public Shop shop;
 

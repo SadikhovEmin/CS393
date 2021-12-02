@@ -23,10 +23,6 @@ public class ShopController {
         return shopService.getAll();
     }
 
-//    @GetMapping(path = "/{id}")
-//    public List<Shop> getById(@PathVariable("id") int id) {
-//        return List.of(shopService.pullById(id));
-//    }
 
     @GetMapping(path = "/{id}")
     public List<Shop> getSpecificShopById(@PathVariable("id") int id) {

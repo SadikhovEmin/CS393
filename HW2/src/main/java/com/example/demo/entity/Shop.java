@@ -31,7 +31,6 @@ public class Shop {
     /**
      * Relationships
      */
-    @JsonIgnore
     @OneToMany(
             mappedBy = "shop"
     )
