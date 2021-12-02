@@ -16,8 +16,11 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
     List<Shop> findByAddressContains(String address);
 
     // Need to always return shop. In case the price of the products are higher than 200 then also show products
-    @Query("select s from Shop s inner join s.products p  where p.price > 200 and s.id = ?1")
-    List<Shop> getSpecificShop(int id);
+    @Query("select p from Shop s inner join s.products p where p.price > 200 and s.id=?1")
+    List<Product> findShopsProductGreaterThan200(int id);
+
+    @Query("select s from Shop s where s.id=?1")
+    Shop getSpecificShop(int id);
 
     @Query("select s.products from Shop s where s.id=?1")
     List<Product> getAllProductsByShopId(int id);

@@ -49,7 +49,11 @@ public class ShopService {
         shopRepository.deleteByShopId(id);
     }
 
-    public List<Shop> getSpecificShop(int id) {
+    public List<Product> findShopsProductGreaterThan200(int id) {
+        return shopRepository.findShopsProductGreaterThan200(id);
+    }
+
+    public Shop getSpecificShop(int id) {
         return shopRepository.getSpecificShop(id);
     }
 
