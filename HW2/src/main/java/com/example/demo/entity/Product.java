@@ -28,6 +28,9 @@ public class Product {
     @Column(name = "Price")
     public Double price;
 
+    @Column(name = "Image")
+    public String image;
+
     /**
      * Relationships
      */

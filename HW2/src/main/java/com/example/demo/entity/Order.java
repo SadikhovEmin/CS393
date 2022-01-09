@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +24,7 @@ public class Order {
     private Integer id;
 
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     public Date date;
 
     @Column(name = "Amount")
@@ -30,7 +33,7 @@ public class Order {
     /**
      * Relationsships
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(
             name = "Customer_ID",
             nullable = false,
@@ -38,7 +41,7 @@ public class Order {
     )
     public Customer customer;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "OrderProduct",
             joinColumns = @JoinColumn(name = "Order_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "Prod_ID", referencedColumnName = "ID")
