@@ -1,0 +1,131 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shop</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!-- <script src="index.js"></script> -->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>Shop All Deals</h1>
+        <section id="productsAll"></section>
+        <h1>Your Shopping Card</h1>
+        <section id="shoppingCard"></section>
+        <button onclick="buy()"> Buy </button>
+        <!-- <script src="index.js"></script> -->
+        
+        <script>
+            var productList = [];  // This will keep all of the products on the shopping card
+
+            axios.get('http://localhost:8080/products')
+                .then(function (response) {
+                    const products = response.data;
+
+                    var tables = "<tr>   <th>Image</th> <th>Name</th> <th>Price</th> <th>Action</th>  </tr>";
+                    
+                    for(var i = 0; i < products.length; i++) {
+                        // productList.push(products[i]);
+                        var price = products[i].price;
+                        var name = products[i].name;
+                        var image = "<img src=" + products[i].image + ".jpg width=\"100\" height=\"100\"/>";
+                        var button =  "<button onClick='addToCard(" + JSON.stringify(products[i]) + ")'> Add to Cart </button>"
+                        tables += "<tr>" + 
+                            "<td>" + image + " </td>" + "<td>" + products[i].name + " </td><td>" + products[i].price + " </td><td>" + button + "</td>" + "</tr>";
+                        
+                    }
+                    
+                    document.getElementById("productsAll").innerHTML = "<table border=1>" + tables + "</tables>";
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+
+            function addToCard(product) {
+                productList.push(product);
+                console.log(productList);
+
+                var tables = "<tr>   <th>Image</th> <th>Name</th> <th>Price</th> <th>Action</th> </tr>";
+                for(var i = 0; i < productList.length; i++) {
+                    var image = "<img src=" + productList[i].image + ".jpg width=\"100\" height=\"100\"/>";
+                    var checkBox =  "<button onClick='removeFromCard(" + i + ")'> Remove Item </button>"
+
+                    tables += "<tr>" + 
+                        "<td>" + image + " </td>" + "<td>" + productList[i].name + " </td>" + "<td>" + productList[i].price + " </td>" + "<td>" + checkBox + " </td>" + "</tr>";
+
+                }
+
+                    document.getElementById("shoppingCard").innerHTML = "<table border=1>" + tables + "</tables>";
+            }
+
+            function removeFromCard(productIndex) {
+                productList.splice(productIndex, 1);
+
+                var tables = "<tr>   <th>Image</th> <th>Name</th> <th>Price</th> <th>Action</th> </tr>";
+                for(var i = 0; i < productList.length; i++) {
+                    var image = "<img src=" + productList[i].image + ".jpg width=\"100\" height=\"100\"/>";
+                    var checkBox =  "<button onClick='removeFromCard(" + i + ")'> Remove Item </button>"
+
+                    tables += "<tr>" + 
+                        "<td>" + image + " </td>" + "<td>" + productList[i].name + " </td>" + "<td>" + productList[i].price + " </td>" + "<td>" + checkBox + " </td>" + "</tr>";
+
+                }
+
+                if (productList.length == 0) {
+                    document.getElementById("shoppingCard").innerHTML = "<div></div>";        // Removes the table
+                } 
+                else {
+                    document.getElementById("shoppingCard").innerHTML = "<table border=1>" + tables + "</tables>";
+                }
+
+            }
+
+            function fetch() {
+                var market = {};
+                var productList_buy = []
+                market.productList_buy = productList_buy;
+
+                for(var i = 0;i<productList.length;i++){
+                    var product = {
+                        "id": productList[i].id,
+                    }
+                    market.productList_buy.push(product);
+                    console.log("Product selected : " + product.id);
+                }
+                console.log("productList_buy : " + productList_buy);
+                return productList_buy;
+            }
+
+            function buy() {
+                var totalAmount = 0;
+                var currentDate = new Date();
+                for(var i = 0; i < productList.length; i++){
+                    totalAmount += productList[i].price
+                }
+                orderFormData = fetch()
+                console.log("Total Amount : " + totalAmount);
+                axios.post('http://localhost:8080/orders', {
+                    date: currentDate,
+                    amount: totalAmount,
+                    productList: orderFormData,
+                    customer: {
+                        firstName: "Emin",
+                        lastName: "Sadikhov",
+                        id: 1
+                    }
+                })
+                .then(function (response) {
+                    console.log(response);
+                })
+
+                console.log("push");
+            }
+
+        </script>
+
+
+
+
+    </body>
+</html>
