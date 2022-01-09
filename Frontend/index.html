@@ -13,6 +13,7 @@
         <h1>Your Shopping Card</h1>
         <section id="shoppingCard"></section>
         <button onclick="buy()"> Buy </button>
+        <section id="totalPrice"></section>
         <!-- <script src="index.js"></script> -->
         
         <script>
@@ -21,6 +22,7 @@
             axios.get('http://localhost:8080/products')
                 .then(function (response) {
                     const products = response.data;
+                    var totalAmount = 0;
 
                     var tables = "<tr>   <th>Image</th> <th>Name</th> <th>Price</th> <th>Action</th>  </tr>";
                     
@@ -36,6 +38,8 @@
                     }
                     
                     document.getElementById("productsAll").innerHTML = "<table border=1>" + tables + "</tables>";
+                    document.getElementById("totalPrice").innerHTML = "<p>Total Price: " + totalAmount + "</p>";
+
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -46,8 +50,11 @@
                 productList.push(product);
                 console.log(productList);
 
+                var totalAmount = 0;
+
                 var tables = "<tr>   <th>Image</th> <th>Name</th> <th>Price</th> <th>Action</th> </tr>";
                 for(var i = 0; i < productList.length; i++) {
+                    totalAmount += productList[i].price;
                     var image = "<img src=" + productList[i].image + ".jpg width=\"100\" height=\"100\"/>";
                     var checkBox =  "<button onClick='removeFromCard(" + i + ")'> Remove Item </button>"
 
@@ -57,13 +64,19 @@
                 }
 
                     document.getElementById("shoppingCard").innerHTML = "<table border=1>" + tables + "</tables>";
+                    document.getElementById("totalPrice").innerHTML = "<p>Total Price: " + totalAmount + "</p>";
+                    
             }
 
             function removeFromCard(productIndex) {
                 productList.splice(productIndex, 1);
 
+                var totalAmount = 0;
+
                 var tables = "<tr>   <th>Image</th> <th>Name</th> <th>Price</th> <th>Action</th> </tr>";
                 for(var i = 0; i < productList.length; i++) {
+                    totalAmount += productList[i].price;
+
                     var image = "<img src=" + productList[i].image + ".jpg width=\"100\" height=\"100\"/>";
                     var checkBox =  "<button onClick='removeFromCard(" + i + ")'> Remove Item </button>"
 
@@ -78,6 +91,7 @@
                 else {
                     document.getElementById("shoppingCard").innerHTML = "<table border=1>" + tables + "</tables>";
                 }
+                document.getElementById("totalPrice").innerHTML = "<p>Total Price: " + totalAmount + "</p>";
 
             }
 
@@ -120,6 +134,7 @@
                 })
 
                 console.log("push");
+                document.getElementById("totalPrice").innerHTML = "<p>Total Price: " + totalAmount + "</p>";
             }
 
         </script>
