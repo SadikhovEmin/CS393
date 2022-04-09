@@ -30,18 +30,7 @@ function addToCard(price) {
 }
 
 function shoppingCard() {
-
-    // var tables = "<tr>   <th>Name</th> <th>Price</th> <th>Action</th>  </tr>";
-    // for(var i = 0; i < list.length; i++) {
-    //     console.log("That part");
-    //     console.log(list.length);
-    //     // var price = list[i].price;            
-    //     tables += "<tr>" + 
-    //         "<td>" + list[i].name + " </td><td>" + list[i].price + " </td><td>" + "</td>" + "</tr>";
-
-    // }
     document.getElementById("shoppingCard").innerHTML = "<h1>Hello</h1>";
-    // document.getElementById("productsAll").innerHTML = "<table border=1>" + tables + "</tables>";
 }
 
 shoppingCard();
